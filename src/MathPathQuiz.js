@@ -73,32 +73,46 @@ export default function MathPathQuiz() {
 
   if (current < questions.length) {
     return (
-      <div className="p-4 text-center">
-        <h2 className="text-xl font-bold mb-6">{questions[current].question}</h2>
-        {questions[current].options.map((opt, i) => (
-          <button
-            key={i}
-            onClick={() => handleSelect(opt.value)}
-            className="block w-full my-2 py-3 rounded-xl bg-sky-200 hover:bg-sky-300"
-          >
-            {opt.text}
-          </button>
-        ))}
+      <div className="min-h-screen bg-pink-50 flex items-center justify-center p-4">
+        <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-xl">
+          <h2 className="text-2xl font-bold mb-6 text-pink-600 text-center">
+            {questions[current].question}
+          </h2>
+          {questions[current].options.map((opt, i) => (
+            <button
+              key={i}
+              onClick={() => handleSelect(opt.value)}
+              className="block w-full my-3 py-3 rounded-xl bg-pink-300 hover:bg-sky-300 text-white text-lg shadow-md transition duration-300"
+            >
+              {opt.text}
+            </button>
+          ))}
+        </div>
       </div>
     );
   }
 
   const result = getResult();
   return (
-    <div className="p-6 text-center">
-      <h2 className="text-2xl font-bold mb-4">🎓 결과 분석</h2>
-      <p className="mb-2">추천 선택 과목: <strong>{result.preferredSubject}</strong></p>
-      <p className="mb-2">추천 입시 전략: <strong>{result.preferredPath === "정시" ? "정시 중심" : "학생부 중심"}</strong></p>
-      <p className="mt-4">💡 학습 팁: 
-        {result.preferredSubject === "미적분" && " 개념 정리와 고난도 문제 해결에 집중해 보세요."}
-        {result.preferredSubject === "확통" && " 실생활 문제와 통계 분석 능력을 키워보세요."}
-        {result.preferredSubject === "기하" && " 공간 감각을 기르는 활동과 증명 연습에 집중하세요."}
-      </p>
+    <div className="min-h-screen bg-pink-50 flex items-center justify-center p-6">
+      <div className="bg-white p-8 rounded-2xl shadow-xl text-center w-full max-w-xl">
+        <h2 className="text-3xl font-bold mb-4 text-sky-500">🎓 결과 분석</h2>
+        <p className="mb-2 text-lg">
+          추천 선택 과목: <strong className="text-pink-600">{result.preferredSubject}</strong>
+        </p>
+        <p className="mb-2 text-lg">
+          추천 입시 전략:{" "}
+          <strong className="text-sky-600">
+            {result.preferredPath === "정시" ? "정시 중심" : "학생부 중심"}
+          </strong>
+        </p>
+        <p className="mt-4 text-base">
+          💡 학습 팁:{" "}
+          {result.preferredSubject === "미적분" && " 개념 정리와 고난도 문제 해결에 집중해 보세요."}
+          {result.preferredSubject === "확통" && " 실생활 문제와 통계 분석 능력을 키워보세요."}
+          {result.preferredSubject === "기하" && " 공간 감각을 기르는 활동과 증명 연습에 집중하세요."}
+        </p>
+      </div>
     </div>
   );
 }
